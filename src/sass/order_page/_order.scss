@@ -1,0 +1,84 @@
+@use '../mixins' as *;
+@use '../imports' as *;
+
+.order-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: var(--color-grey-light-1);
+}
+
+.order-header {
+  text-align: center;
+  margin-bottom: 30px;
+  h2 {
+    font-size: 32px;
+    font-family: var(--font-gotham-bold);
+    color: var(--color-dark-1);
+  }
+}
+
+.order-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.order-card .badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+}
+
+.order-card .badge.status {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1e3a8a;
+}
+.order-card .badge.paid {
+  background: rgba(34, 197, 94, 0.1);
+  color: #166534;
+}
+.order-card .badge.unpaid {
+  background: rgba(220, 38, 38, 0.1);
+  color: #7f1d1d;
+}
+
+.order-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+
+  img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .details {
+    flex: 1;
+
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-dark-1);
+    }
+
+    .price {
+      font-size: 12px;
+      color: var(--color-text-opacity75);
+    }
+  }
+
+  .total {
+    font-weight: 600;
+    color: var(--color-dark-1);
+  }
+}

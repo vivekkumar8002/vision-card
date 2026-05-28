@@ -1,0 +1,129 @@
+@import '../mixins';
+
+.cart {
+  &-page {
+    @include center-self(horizontal);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 75px;
+    margin-block: 125px;
+    background: white;
+    flex-direction: column;
+    width: var(--page-width);
+
+    @include breakpoint(lg) {
+      margin-top: 55px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 20px;
+    font-family: var(--font-gotham-bold);
+    font-size: var(--text-lg);
+    letter-spacing: 2px;
+  }
+
+  &__form {
+    position: relative;
+    width: 100%;
+
+    %cart-width {
+      @include center-self(horizontal);
+      width: min(90%, 1200px);
+    }
+  }
+
+  &__table {
+    @extend %cart-width;
+    margin-top: 25px;
+  }
+
+  &__checkout {
+    @extend %cart-width;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__total-price {
+    position: relative;
+    margin-top: 60px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-grey-light-3);
+    text-align: right;
+
+    &--wrapper {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    &--label {
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: var(--text-xxs);
+      font-family: var(--font-gotham-black);
+    }
+
+    &--actual {
+      font-family: var(--font-gotham-bold);
+      font-size: var(--text-xxl);
+    }
+
+    &--disclaimer {
+      margin-top: 10px;
+      font-family: var(--font-roboto-mono);
+      font-size: var(--text-xxs);
+      font-style: italic;
+    }
+  }
+
+  &__btn-submit {
+    background: var(--color-grey-dark-2);
+    margin-top: 40px;
+    padding: 15px 40px;
+    color: var(--color-text-light);
+    font-size: var(--text-xs);
+    font-family: var(--font-gotham-bold);
+    letter-spacing: 2px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background: var(--color-accent-1);
+    }
+  }
+
+  &__shop-link {
+    margin-top: 20px;
+    color: rgba(88, 88, 88);
+    font-size: var(--text-xs);
+    font-family: var(--font-poppins);
+    text-underline-offset: 3px;
+  }
+}
+
+.cart-empty {
+  &--wrapper {
+    @extend %parent-with-centered-children;
+    flex-direction: column;
+    gap: 30px;
+    margin-block: 200px;
+  }
+
+  &__message {
+    text-transform: uppercase;
+    font-family: var(--font-gotham-bold);
+    letter-spacing: 2px;
+  }
+
+  &__link {
+    font-size: var(--text-xs);
+    font-family: var(--font-poppins);
+    text-transform: uppercase;
+    text-underline-offset: 5px;
+    letter-spacing: 1px;
+  }
+}

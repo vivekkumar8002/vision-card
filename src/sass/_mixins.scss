@@ -1,0 +1,161 @@
+@use 'sass:math';
+
+/// Works with pixel units
+@function fluid-font(
+  $min-width,
+  $max-width,
+  $font-size-at-min-width,
+  $font-size-at-max-width
+) {
+  $slope: math.div(
+    ($font-size-at-max-width - $font-size-at-min-width),
+    ($max-width - $min-width)
+  );
+  $y-axis-intersection: -1 * $min-width * $slope + $font-size-at-min-width;
+  $return-value: clamp(
+    #{$font-size-at-min-width},
+    #{$y-axis-intersection} + #{$slope} * 100vw,
+    #{$font-size-at-max-width}
+  );
+  @return $return-value;
+}
+
+/* MEDIA QUERY MIXIN*/
+
+$breakpoints: (
+  xs: 320px,
+  sm: 600px,
+  md: 700px,
+  lg: 900px,
+  xl: 1000px,
+  xxl: 1200px,
+);
+
+@mixin breakpoint($key, $minmax: max) {
+  $size: map-get($breakpoints, $key);
+
+  @if ($size) {
+    @media only screen and (#{$minmax}-width: $size) {
+      @content;
+    }
+  } @else {
+    @error '`#{$key}` does not exist in the $breakpoints';
+  }
+}
+
+@mixin breakpoint-exact($size, $minmax: max) {
+  @if ($size) {
+    @media only screen and (#{$minmax}-width: $size) {
+      @content;
+    }
+  } @else {
+    @error '`#{$key}` does not exist in the $breakpoints';
+  }
+}
+
+@mixin center-self($position, $relOrAbs: relative) {
+  position: $relOrAbs;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  } @else if $position == 'horizontal' {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  } @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* PLACEHOLDERS */
+
+%parent-with-centered-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+%cover-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+%section-title {
+  margin-block: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font-gotham);
+  font-size: var(--text-md);
+}
+
+%icon-wrapper {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+
+  display: flex;
+  gap: 20px;
+}
+
+%btn-icon {
+  font-size: 2rem;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+
+  @include breakpoint(sm) {
+    font-size: 1.65rem;
+  }
+}
+
+%cart-badge--hover {
+  transform: scale(1.1);
+}
+
+%cart-badge {
+  @extend %parent-with-centered-children;
+  position: absolute;
+  top: 75%;
+  right: -5px;
+  background: var(--color-dark-2);
+  height: 24px;
+  border-radius: 50px;
+  aspect-ratio: 1 / 1;
+  padding-right: 2px;
+  text-align: center;
+  font-family: var(--font-roboto);
+  color: var(--color-text-light);
+  font-size: 12px;
+  letter-spacing: -1px;
+
+  @include breakpoint(sm) {
+    height: 18px;
+    font-size: 10px;
+  }
+}
+
+%search-svg {
+  display: block;
+  width: 27.5px;
+
+  @include breakpoint(sm) {
+    display: none;
+  }
+}

@@ -1,0 +1,111 @@
+@import '../mixins';
+
+.pgnt {
+  &__container {
+    @include center-self(horizontal, absolute);
+    top: 100%;
+    width: 100%;
+    margin-top: 5px;
+
+    @extend %parent-with-centered-children;
+    flex-wrap: wrap;
+    font-family: var(--font-gotham-book);
+
+    @include breakpoint(md) {
+      margin-top: 50px;
+    }
+  }
+
+  &__li {
+    padding: 20px;
+    cursor: pointer;
+
+    @include breakpoint(sm) {
+      padding: 20px 10px;
+    }
+  }
+
+  &__link {
+    padding: 5px;
+    border-radius: 5px;
+
+    &.active {
+      color: var(--color-accent-1);
+      border-bottom: 1px solid;
+    }
+
+    &:focus,
+    &:hover {
+      background: var(--color-accent-1);
+      color: var(--color-text-light);
+      outline: none;
+    }
+  }
+
+  &__btn {
+    --btn-margin: 15px;
+
+    color: var(--color-accent-1);
+    border: 1.2px solid currentColor;
+    border-radius: 100px;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    @include breakpoint(xl) {
+      font-size: 10px;
+    }
+
+    @include breakpoint(md) {
+      position: absolute;
+      margin-block: 5px;
+    }
+
+    &.disabled {
+      display: none;
+    }
+
+    &--prev {
+      margin-right: var(--btn-margin);
+
+      @include breakpoint(md) {
+        margin-right: 0;
+        bottom: 100%;
+      }
+    }
+
+    &--next {
+      margin-left: var(--btn-margin);
+
+      @include breakpoint(md) {
+        margin-left: 0;
+        top: 100%;
+      }
+    }
+
+    &:hover,
+    &:focus-within {
+      outline: none;
+      background: var(--color-accent-1);
+      color: var(--color-text-light);
+    }
+
+    &-link {
+      display: inline-block;
+      padding: 15px 25px;
+      height: 100%;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &:focus {
+        outline: none;
+      }
+
+      @include breakpoint(sm) {
+        padding: 15px;
+      }
+    }
+  }
+}

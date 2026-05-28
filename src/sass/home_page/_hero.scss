@@ -1,0 +1,213 @@
+@import '../mixins';
+
+.hero {
+  @include center-self(horizontal);
+  @extend %parent-with-centered-children;
+  overflow: hidden;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  &-item {
+    width: 100%;
+    margin: 0;
+    transition: 300ms;
+  }
+
+  &-item__img {
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(80%) grayscale(30%);
+    transition: opacity 500ms ease-out;
+
+    &.img--loading {
+      filter: brightness(80%) grayscale(30%) blur(12px);
+      scale: 1.05;
+    }
+
+    &.img-1 {
+      object-position: center center;
+    }
+
+    &.img-2 {
+      // polka-dot shirt guy
+      object-position: top center;
+      transform: rotateY(180deg);
+    }
+
+    &.img-3 {
+      // two guys on a mountain
+      object-position: center top;
+      transform: rotateY(180deg);
+    }
+
+    &.img-4 {
+      object-position: center center;
+    }
+
+    &.img-5 {
+      object-position: center center;
+    }
+
+    &.img-6 {
+      // group with guitar
+      object-position: top center;
+    }
+
+    @media (max-width: 1200px) {
+      height: 600px;
+    }
+
+    @media (max-width: 992px) {
+      height: 500px;
+    }
+
+    @media (max-width: 768px) {
+      height: 400px;
+      object-position: center center;
+    }
+
+    @media (max-width: 480px) {
+      height: 350px;
+    }
+  }
+
+  &-item__dynamic-content {
+    @include center-self(horizontal);
+    width: var(--page-width);
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-inline: 50px;
+    margin-bottom: 50px;
+    color: var(--color-text-light);
+
+    @include breakpoint(lg) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &-item__text-wrapper {
+    width: 40%;
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+
+    @include breakpoint(lg) {
+      width: 100%;
+      padding-inline: 0;
+      padding-block: 25px;
+    }
+  }
+
+  &-item__title {
+    font-family: var(--font-gotham);
+    font-size: var(--text-xxl);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  &-item__details {
+    font-family: var(--font-raleway);
+    font-size: var(--text-xs);
+    font-weight: lighter;
+    letter-spacing: 0.9px;
+    line-height: 1.25em;
+  }
+
+  &-item__link {
+    padding: 20px 5px;
+    width: 150px;
+    height: fit-content;
+    background-color: var(--color-accent-1);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    font-size: var(--text-xs);
+    font-family: var(--font-gotham-bold);
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    & * {
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+
+    @include breakpoint(lg) {
+      padding: 12.5px;
+    }
+  }
+
+  .flickity {
+    &-viewport {
+      width: 100%;
+    }
+
+    &-button {
+      --offset-side: 10px;
+      @include center-self(vertical, absolute);
+      @extend %parent-with-centered-children;
+      box-sizing: content-box;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      fill: white;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 15px;
+
+      &.previous {
+        margin-left: var(--offset-side);
+        left: 0;
+      }
+
+      &.next {
+        margin-right: var(--offset-side);
+        right: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    &-page-dots {
+      @include center-self(horizontal, absolute);
+      display: flex;
+      position: absolute;
+      bottom: 15px;
+      width: 80%;
+      background: rgba(0, 0, 0, 0.15);
+
+      &:hover .dot.is-selected {
+        background-color: rgba(255, 255, 255, 0.75);
+      }
+
+      &:hover .dot {
+        background: rgba(49, 49, 49, 0.25);
+        height: 8.5px;
+      }
+
+      & .dot {
+        border-radius: 5px;
+        width: calc(100% / 7);
+        height: 6px;
+        opacity: 1;
+        background: transparent;
+      }
+
+      & .dot.is-selected {
+        background: rgba(255, 255, 255, 0.55);
+      }
+    }
+  }
+}

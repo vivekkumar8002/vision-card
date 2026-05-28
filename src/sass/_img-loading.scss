@@ -1,0 +1,11 @@
+.img--loading {
+  filter: blur(20px);
+  opacity: 0.85;
+  transition: opacity 300ms;
+}
+
+.img--loading-2 {
+  filter: blur(5px);
+  opacity: 0.85;
+  transition: opacity 300ms;
+}
