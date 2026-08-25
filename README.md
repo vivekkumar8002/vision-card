@@ -78,4 +78,4 @@ About Us Page - Mobile
 
 ---
 
-Developed by **Renchester Ramos**
+Developed by **Vivek Kumar Ravi**
